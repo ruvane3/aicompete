@@ -1,5 +1,6 @@
 from django.http import JsonResponse
 from django.shortcuts import render_to_response
+from django.http import HttpResponseNotFound
 from aicompete.models import GameState
 import json
 
@@ -19,12 +20,34 @@ def without_valid_moves(game_state):
     }
 
 
+def show_game(request, game_type, game_id):
+    if game_type != "tictactoe":
+        return HttpResponseNotFound('Unknown Game Type: ' + game_type)
+    try:
+        game = GameState.objects.all().filter(game_id=game_id).get()
+    except:
+        return HttpResponseNotFound('Unknown Game ID: ' + game_id)
+
+    return render_to_response(str(game_type + '.html'))
+
+
+def get_game_info(request, game_type, game_id):
+    if game_type != "tictactoe":
+        return HttpResponseNotFound('Unknown Game Type: ' + game_type)
+    try:
+        game = GameState.objects.all().filter(game_id=game_id).get()
+    except:
+        return HttpResponseNotFound('Unknown Game ID: ' + game_id)
+
+    return JsonResponse(decode_game_state(game.json_game_state))
+
+
 def create_new_match():
     game_id = "fakeid"
     game_type = "tictactoe"
     game_state = {
         "current_player": 1,
-        "board": [[0, 0, 0], [0, 0, 0], [0, 0, 0]]
+        "board": [[0, 0, 0], [0, 2, 0], [0, 0, 0]]
     }
 
     x = GameState(game_id=game_id, game_type=game_type,
@@ -34,7 +57,7 @@ def create_new_match():
 
 def is_my_turn(request):
     game_id = "fakeid"
-    player = int("2")
+    player = int("1")
 
     game = GameState.objects.all().filter(game_id=game_id).get()
     game_state = decode_game_state(game.json_game_state)
