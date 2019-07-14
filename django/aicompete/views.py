@@ -3,6 +3,7 @@ from django.shortcuts import render_to_response
 from django.http import HttpResponseNotFound
 from aicompete.models import GameState
 import json
+from random_word import RandomWords
 
 
 def encode_game_state(game_state):
@@ -42,17 +43,16 @@ def get_game_info(request, game_type, game_id):
     return JsonResponse(decode_game_state(game.json_game_state))
 
 
-def create_new_match():
-    game_id = "fakeid"
-    game_type = "tictactoe"
-    game_state = {
-        "current_player": 1,
-        "board": [[0, 0, 0], [0, 2, 0], [0, 0, 0]]
-    }
-
-    x = GameState(game_id=game_id, game_type=game_type,
-                  json_game_state=encode_game_state(game_state))
-    x.save()
+def create_new_match(request):
+    game_type = request.GET['gameType']
+    if game_type != "tictactoe":
+        return JsonResponse({'status': 'false', 'message': "unknown game type"}, status=500)
+    r = RandomWords()
+    words = r.get_random_words(
+        includePartOfSpeech="noun", minCorpusCount=400, maxLength=10, limit=3)
+    print(words)
+    # TODO: fix and finish this method
+    return JsonResponse({"gameid": "fakeid"})
 
 
 def is_my_turn(request):
@@ -93,6 +93,10 @@ def submit_action(request):
 
 def index(request):
     return render_to_response('index.html')
+
+
+def tictactoe_create(request):
+    return render_to_response('tictactoe-create.html')
 
 
 def get_valid_moves(game_state):

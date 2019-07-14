@@ -12,7 +12,7 @@
   <meta name="description" content="">
   <meta name="author" content="">
 
-  <title>AI COMPETE</title>
+  <title>AI Compete</title>
 
   <!-- Bootstrap core CSS -->
   <link href="{% static 'css/bootstrap.min.css' %}" rel="stylesheet">
@@ -30,8 +30,15 @@
       </div>
     </div>
     <div class="row">
-     <div class="col-lg-12 text-center">
-        <a href="https://en.wikipedia.org/wiki/Six_degrees_of_separation">dummy link.</a>
+     <div class="col-lg-12">
+        <div class="card" style="width: 18rem;">
+          <img class="card-img-top" src="{% static 'media/tictactoe.png' %}" alt="Card image cap">
+          <div class="card-body">
+            <h5 class="card-title">Tic Tac Toe</h5>
+            <p class="card-text">Two players, X and O, take turns marking the spaces in a 3×3 grid. A player wins by placing three of their marks in a horizontal, vertical, or diagonal row.</p>
+            <a href="{% url 'tic-tac-toe-create' %}" class="btn btn-primary">Set up bot game</a>
+          </div>
+        </div>
       </div>
     </div>
   </div>

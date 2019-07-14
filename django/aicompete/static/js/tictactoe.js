@@ -19,7 +19,7 @@ function bY(y) {
 $(document).ready(function() {
 	canvas = document.getElementById("board");
 	canvas.width = $("#board-holder").width();
-  	boardSize = (3/5) * canvas.width;
+  	boardSize = (2/5) * canvas.width;
   	canvas.height = boardSize + margin.top + margin.bottom;
   	margin.left = canvas.width - boardSize - margin.right;
 	ctx = canvas.getContext("2d");

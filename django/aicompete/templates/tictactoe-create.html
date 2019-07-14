@@ -1,0 +1,101 @@
+{% load staticfiles %}
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <link rel="shortcut icon" type="image/png" href="{% static '/media/favicon.ico' %}"/>
+  <link href='https://fonts.googleapis.com/css?family=ABeeZee' rel='stylesheet'>
+
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <meta name="description" content="">
+  <meta name="author" content="">
+
+  <title>Create Tic-Tac-Toe match</title>
+
+  <!-- Bootstrap core CSS -->
+  <link href="{% static 'css/bootstrap.min.css' %}" rel="stylesheet">
+  <link href="{% static 'css/tictactoe-create.css' %}" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+
+</head>
+
+<body>
+
+  <!-- Page Content -->
+  <div class="container-fluid">
+    <div class="row">
+      <div class="col-lg-12 text-center">
+        <h1 class="mt-5">Tic Tac Toe</h1>
+      </div>
+    </div>
+    <div class="row justify-content-md-center">
+     <div class="col-lg-6">
+      <form>
+        <div class="row">
+          <div class="col">
+            <input id = "bot1id" type="text" class="form-control" placeholder="Bot-One-ID [A-Za-z0-9.-_]">
+            <div style = "display:none;" id = "bot1iderror" class="alert alert-danger" role="alert">
+              Not valid name pattern.
+            </div>
+          </div>
+          <div class="col">
+            <input id = "bot2id" type="text" class="form-control" placeholder="Bot-Two-ID [A-Za-z0-9.-_]">
+            <div style = "display:none;" id = "bot2iderror" class="alert alert-danger" role="alert">
+              Not valid name pattern.
+            </div>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-8">
+            <input id = "numgames" type="text" class="form-control" placeholder="# Games 1-100">
+            <div style = "display:none;" id = "numgameserror" class="alert alert-danger" role="alert">
+              Choose a number between 1 and 100.
+            </div>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-8">
+            <input id = "start-turn-max-time" type="text" class="form-control" placeholder="How long to each bot has to begin their turn (ms)">
+            <div style = "display:none;" id = "start-turn-max-timeerror" class="alert alert-danger" role="alert">
+              Choose a number between 1 and 50,000.
+            </div>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-8">
+            <input id = "turn-max-time" type="text" class="form-control" placeholder="How long to each bot has to complete their turn (ms)">
+            <div style = "display:none;" id = "turn-max-timeerror" class="alert alert-danger" role="alert">
+              Choose a number between 1 and 50,000.
+            </div>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-8">
+            <select class="form-control" id="afk-strategy" placeholder = "test">
+              <option value="" disabled selected>Choose strategy for AFK Bots</option>
+              <option value="rndmove">Make random move</option>
+              <option value="ffgame">Forfeit game</option>
+              <option value="ffmatch">Forfeit match</option>
+            </select>
+          </div>
+        </div>
+        <a onclick="test()" class="btn btn-primary">Create new match</a>
+      </form>
+    </div>
+  </div>
+
+  <!-- Bootstrap core JavaScript -->
+  <script src="{% static 'js/bootstrap.bundle.min.js' %}"></script>
+  <script src="{% static 'js/jquery.min.js' %}"></script>
+  <script src="{% static 'js/tictactoe-create.js' %}"></script>
+  <style>
+    body {
+        font-family: 'ABeeZee';
+    }
+  </style>
+
+</body>
+
+</html>
